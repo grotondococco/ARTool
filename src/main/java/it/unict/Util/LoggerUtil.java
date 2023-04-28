@@ -10,6 +10,6 @@ public class LoggerUtil {
 
     public static void logMethodEnd(Logger log){
         StackTraceElement[] stackTrace = new Throwable().getStackTrace();
-        log.debug("{} - Method START", stackTrace[1]);
+        log.debug("{} - Method END", stackTrace[1]);
     }
 }
