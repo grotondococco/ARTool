@@ -2,7 +2,9 @@ package it.unict.JavaParserPlayground;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
+import it.unict.Enum.ERRORS;
 import it.unict.Util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +23,7 @@ public class JavaParserPlayground {
             MethodNamePrinter methodNamePrinter = new MethodNamePrinter();
             printMethodList(methodNamePrinter.getMethodList(cu));
         } catch (FileNotFoundException e) {
-            log.error("Input file not found.");
+            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
         }
         LoggerUtil.logMethodEnd(log);
     }
@@ -44,7 +46,7 @@ public class JavaParserPlayground {
         try {
             cu = StaticJavaParser.parse(new File(filePath));
         } catch (FileNotFoundException e) {
-            log.error("Input file not found.");
+            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
         }
         methodNameCollector.visit(cu, methodNames);
         LoggerUtil.logMethodEnd(log);
@@ -57,5 +59,19 @@ public class JavaParserPlayground {
         log.info("Methods found: {}", methodNames);
         LoggerUtil.logMethodEnd(log);
     }
+
+    public void printIntegerLiteralWithModifier(String filePath) {
+        LoggerUtil.logMethodStart(log);
+        ModifierVisitor<?> numericLiteralVisitor = new IntegerLiteralModifier();
+        CompilationUnit cu = null;
+        try {
+            cu = StaticJavaParser.parse(new File(filePath));
+        } catch (FileNotFoundException e) {
+            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
+        }
+        numericLiteralVisitor.visit(cu, null);
+        LoggerUtil.logMethodEnd(log);
+    }
+
 
 }

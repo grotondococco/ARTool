@@ -6,7 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JPPMain {
 
-    private static final String FILE_PATH = "src/main/java/it/unict/JavaCodeSamples/CycleSample.java";
+    private static final String CYCLE_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/CycleSample.java";
+
+    private static final String INTEGER_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/IntegerModifySample.java";
 
     public static void main(String[] args) {
         LoggerUtil.logMethodStart(log);
@@ -14,10 +16,13 @@ public class JPPMain {
         JavaParserPlayground javaParserPlayground = new JavaParserPlayground();
 
         // printMethods(String filePath) call
-        javaParserPlayground.printMethods(FILE_PATH);
+        javaParserPlayground.printMethods(CYCLE_SAMPLE_PATH);
 
         // getMethodListFromVisitor(String filePath) call
-        javaParserPlayground.printMethodListUsingVisitor(FILE_PATH);
+        javaParserPlayground.printMethodListUsingVisitor(CYCLE_SAMPLE_PATH);
+
+        // printIntegerLiteralWithModifier(String filePath) call
+        javaParserPlayground.printIntegerLiteralWithModifier(INTEGER_SAMPLE_PATH);
 
         LoggerUtil.logMethodEnd(log);
     }
