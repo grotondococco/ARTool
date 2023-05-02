@@ -26,5 +26,5 @@ public class MethodNamePrinter extends VoidVisitorAdapter<Void> {
         methodNameVisitor.visit(cu, null);
         return methodList;
     }
-    
+
 }

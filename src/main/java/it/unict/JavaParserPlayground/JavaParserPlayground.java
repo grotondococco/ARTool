@@ -4,6 +4,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import it.unict.Enum.ERRORS;
 import it.unict.Util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -73,5 +74,17 @@ public class JavaParserPlayground {
         LoggerUtil.logMethodEnd(log);
     }
 
+    public void locateLoops(String filePath) {
+        LoggerUtil.logMethodStart(log);
+        VoidVisitorAdapter<Void> loopLocator = new LoopLocator();
+        CompilationUnit cu = null;
+        try {
+            cu = StaticJavaParser.parse(new File(filePath));
+        } catch (FileNotFoundException e) {
+            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
+        }
+        loopLocator.visit(cu, null);
+        LoggerUtil.logMethodEnd(log);
+    }
 
 }

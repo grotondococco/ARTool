@@ -24,6 +24,9 @@ public class JPPMain {
         // printIntegerLiteralWithModifier(String filePath) call
         javaParserPlayground.printIntegerLiteralWithModifier(INTEGER_SAMPLE_PATH);
 
+        // localeLoops(String filePath) call
+        javaParserPlayground.locateLoops(CYCLE_SAMPLE_PATH);
+
         LoggerUtil.logMethodEnd(log);
     }
 
