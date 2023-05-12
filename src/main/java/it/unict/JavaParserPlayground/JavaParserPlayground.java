@@ -87,4 +87,14 @@ public class JavaParserPlayground {
         LoggerUtil.logMethodEnd(log);
     }
 
+    public void printComments(String filePath) {
+        CommentReporter commentReporter = new CommentReporter();
+        List<CommentReportEntry> commentsList = commentReporter.getAllComments(filePath);
+        if (!commentsList.isEmpty()) {
+            commentsList.forEach(c -> log.info(c.toString()));
+        } else {
+            log.info("No comments found");
+        }
+    }
+
 }

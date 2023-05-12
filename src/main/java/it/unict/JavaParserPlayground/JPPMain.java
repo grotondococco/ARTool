@@ -10,6 +10,8 @@ public class JPPMain {
 
     private static final String INTEGER_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/IntegerModifySample.java";
 
+    private static final String COMMENT_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/CommentSample.java";
+
     public static void main(String[] args) {
         LoggerUtil.logMethodStart(log);
 
@@ -26,6 +28,9 @@ public class JPPMain {
 
         // localeLoops(String filePath) call
         javaParserPlayground.locateLoops(CYCLE_SAMPLE_PATH);
+
+        // printComments(String filePath) call
+        javaParserPlayground.printComments(COMMENT_SAMPLE_PATH);
 
         LoggerUtil.logMethodEnd(log);
     }
