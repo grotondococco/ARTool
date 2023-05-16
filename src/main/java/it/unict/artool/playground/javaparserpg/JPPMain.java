@@ -12,6 +12,8 @@ public class JPPMain {
 
     private static final String COMMENT_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CommentSample.java";
 
+    private static final String MULTIPLE_IF_PATH = "src/main/java/it/unict/artool/playground/codesamples/MultipleIfSample.java";
+
     public static void main(String[] args) {
         LoggerUtil.logMethodStart(log);
 
@@ -31,6 +33,9 @@ public class JPPMain {
 
         // printComments(String filePath) call
         javaParserPlayground.printComments(COMMENT_SAMPLE_PATH);
+
+        // printIfStatements(String filePath) call
+        javaParserPlayground.printIfStatements(MULTIPLE_IF_PATH);
 
         LoggerUtil.logMethodEnd(log);
     }

@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class JavaParserPlayground {
@@ -95,6 +97,28 @@ public class JavaParserPlayground {
         } else {
             log.info("No comments found");
         }
+    }
+
+    private Map<String, String> getIfStatementMap(String filePath) {
+        LoggerUtil.logMethodStart(log);
+        Map<String, String> ifStatementList = new HashMap<>();
+        ModifierVisitor<Map<String, String>> conditionalModifier = new ConditionalModifier();
+        CompilationUnit cu = null;
+        try {
+            cu = StaticJavaParser.parse(new File(filePath));
+        } catch (FileNotFoundException e) {
+            log.error(Errors.FILE_NOT_FOUND.getDescrption());
+        }
+        conditionalModifier.visit(cu, ifStatementList);
+        LoggerUtil.logMethodEnd(log);
+        return ifStatementList;
+    }
+
+    public void printIfStatements(String filePath) {
+        LoggerUtil.logMethodStart(log);
+        Map<String, String> ifStatementMap = getIfStatementMap(filePath);
+        ifStatementMap.keySet().forEach((str -> log.info("Multiple If Statements found: \"{}\" used in lines:  {}", str, ifStatementMap.get(str))));
+        LoggerUtil.logMethodEnd(log);
     }
 
 }
