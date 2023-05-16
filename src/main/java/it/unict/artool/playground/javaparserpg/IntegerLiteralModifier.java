@@ -1,4 +1,4 @@
-package it.unict.JavaParserPlayground;
+package it.unict.artool.playground.javaparserpg;
 
 import com.github.javaparser.Range;
 import com.github.javaparser.ast.body.FieldDeclaration;

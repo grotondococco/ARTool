@@ -1,4 +1,4 @@
-package it.unict;
+package it.unict.artool;
 
 public class Main {
 

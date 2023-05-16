@@ -1,4 +1,4 @@
-package it.unict.JavaCodeSamples;
+package it.unict.artool.playground.codesamples;
 
 // The class below represents the sample of code with comments
 public class CommentSample {

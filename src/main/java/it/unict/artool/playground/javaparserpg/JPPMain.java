@@ -1,16 +1,16 @@
-package it.unict.JavaParserPlayground;
+package it.unict.artool.playground.javaparserpg;
 
-import it.unict.Util.LoggerUtil;
+import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class JPPMain {
 
-    private static final String CYCLE_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/CycleSample.java";
+    private static final String CYCLE_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CycleSample.java";
 
-    private static final String INTEGER_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/IntegerModifySample.java";
+    private static final String INTEGER_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/IntegerModifySample.java";
 
-    private static final String COMMENT_SAMPLE_PATH = "src/main/java/it/unict/JavaCodeSamples/CommentSample.java";
+    private static final String COMMENT_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CommentSample.java";
 
     public static void main(String[] args) {
         LoggerUtil.logMethodStart(log);

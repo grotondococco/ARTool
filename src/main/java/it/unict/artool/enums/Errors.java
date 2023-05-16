@@ -1,10 +1,10 @@
-package it.unict.Enum;
+package it.unict.artool.enums;
 
-public enum ERRORS {
+public enum Errors {
 
     FILE_NOT_FOUND("Input file not found.");
 
-    private ERRORS(final String description) {
+    private Errors(final String description) {
         this.descrption = description;
     }
 

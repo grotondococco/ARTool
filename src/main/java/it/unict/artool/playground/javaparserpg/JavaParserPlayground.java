@@ -1,12 +1,12 @@
-package it.unict.JavaParserPlayground;
+package it.unict.artool.playground.javaparserpg;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import it.unict.Enum.ERRORS;
-import it.unict.Util.LoggerUtil;
+import it.unict.artool.enums.Errors;
+import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class JavaParserPlayground {
             MethodNamePrinter methodNamePrinter = new MethodNamePrinter();
             printMethodList(methodNamePrinter.getMethodList(cu));
         } catch (FileNotFoundException e) {
-            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
+            log.error(Errors.FILE_NOT_FOUND.getDescrption());
         }
         LoggerUtil.logMethodEnd(log);
     }
@@ -47,7 +47,7 @@ public class JavaParserPlayground {
         try {
             cu = StaticJavaParser.parse(new File(filePath));
         } catch (FileNotFoundException e) {
-            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
+            log.error(Errors.FILE_NOT_FOUND.getDescrption());
         }
         methodNameCollector.visit(cu, methodNames);
         LoggerUtil.logMethodEnd(log);
@@ -68,7 +68,7 @@ public class JavaParserPlayground {
         try {
             cu = StaticJavaParser.parse(new File(filePath));
         } catch (FileNotFoundException e) {
-            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
+            log.error(Errors.FILE_NOT_FOUND.getDescrption());
         }
         numericLiteralVisitor.visit(cu, null);
         LoggerUtil.logMethodEnd(log);
@@ -81,7 +81,7 @@ public class JavaParserPlayground {
         try {
             cu = StaticJavaParser.parse(new File(filePath));
         } catch (FileNotFoundException e) {
-            log.error(ERRORS.FILE_NOT_FOUND.getDescrption());
+            log.error(Errors.FILE_NOT_FOUND.getDescrption());
         }
         loopLocator.visit(cu, null);
         LoggerUtil.logMethodEnd(log);
