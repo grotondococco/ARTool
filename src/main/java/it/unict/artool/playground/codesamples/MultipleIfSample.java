@@ -13,6 +13,9 @@ public class MultipleIfSample {
         if (n == 2) {
             result = 1 + 3;
         }
+        if (result == 1) {
+            result = 1 + 50;
+        }
         return result;
     }
 

@@ -34,8 +34,11 @@ public class JPPMain {
         // printComments(String filePath) call
         javaParserPlayground.printComments(COMMENT_SAMPLE_PATH);
 
-        // printIfStatements(String filePath) call
-        javaParserPlayground.printIfStatements(MULTIPLE_IF_PATH);
+        // printIfStatementsinSameBlock(String filePath) call
+        javaParserPlayground.printIfStatementsinSameBlock(MULTIPLE_IF_PATH);
+
+        // printIfStatementsinSameBlock(String filePath) call
+        javaParserPlayground.printMultipleIfStatements(MULTIPLE_IF_PATH);
 
         LoggerUtil.logMethodEnd(log);
     }

@@ -2,6 +2,8 @@ package it.unict.artool.playground.javaparserpg;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -99,25 +101,50 @@ public class JavaParserPlayground {
         }
     }
 
-    private Map<String, String> getIfStatementMap(String filePath) {
+    private Map<BlockStmt, List<IfStmt>> getIfStatementMap(String filePath) {
         LoggerUtil.logMethodStart(log);
-        Map<String, String> ifStatementList = new HashMap<>();
-        ModifierVisitor<Map<String, String>> conditionalModifier = new ConditionalModifier();
+        Map<BlockStmt, List<IfStmt>> blockStmtListMap = new HashMap<>();
+        ConditionalModifier conditionalModifier = new ConditionalModifier();
+        conditionalModifier.initMap();
         CompilationUnit cu = null;
         try {
             cu = StaticJavaParser.parse(new File(filePath));
         } catch (FileNotFoundException e) {
             log.error(Errors.FILE_NOT_FOUND.getDescrption());
         }
-        conditionalModifier.visit(cu, ifStatementList);
+        conditionalModifier.visit(cu, blockStmtListMap);
         LoggerUtil.logMethodEnd(log);
-        return ifStatementList;
+        return blockStmtListMap;
     }
 
-    public void printIfStatements(String filePath) {
+    public void printIfStatementsinSameBlock(String filePath) {
         LoggerUtil.logMethodStart(log);
-        Map<String, String> ifStatementMap = getIfStatementMap(filePath);
-        ifStatementMap.keySet().forEach((str -> log.info("Multiple If Statements found: \"{}\" used in lines:  {}", str, ifStatementMap.get(str))));
+        Map<BlockStmt, List<IfStmt>> blockStmtListMap = getIfStatementMap(filePath);
+        for (BlockStmt b : blockStmtListMap.keySet()) {
+            log.info("Found Block Statement containing \"if conditions\" @ Line[{}]:\n {}", b.getRange().get().begin.line, blockStmtListMap.get(b));
+        }
+        LoggerUtil.logMethodEnd(log);
+    }
+
+    public void printMultipleIfStatements(String filePath) {
+        LoggerUtil.logMethodStart(log);
+        Map<BlockStmt, List<IfStmt>> blockStmtListMap = getIfStatementMap(filePath);
+        Map<String, List<String>> multipleIfMap = new HashMap<>();
+        for (BlockStmt b : blockStmtListMap.keySet()) {
+            List<IfStmt> ifStmtList = blockStmtListMap.get(b);
+            for (IfStmt ifStmt : ifStmtList) {
+                String conditionLeft = ifStmt.getCondition().asBinaryExpr().getLeft().toString();
+                if (!multipleIfMap.containsKey(conditionLeft)) {
+                    multipleIfMap.put(conditionLeft, new ArrayList<>());
+                }
+                multipleIfMap.get(conditionLeft).add(String.valueOf(ifStmt.getRange().get().begin.line));
+            }
+        }
+        for (String b : multipleIfMap.keySet()) {
+            if (multipleIfMap.get(b).size() > 1) {
+                log.info("For the variable \"{}\" - found usage in multiple if statement @ lines: {}", b, multipleIfMap.get(b));
+            }
+        }
         LoggerUtil.logMethodEnd(log);
     }
 
