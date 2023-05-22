@@ -145,6 +145,8 @@ public class JavaParserPlayground {
                 log.info("For the variable \"{}\" - found usage in multiple if statement @ lines: {}", b, multipleIfMap.get(b));
             }
         }
+        //TODO propose switch
+//        for (BlockStmt blockStmt : )
         LoggerUtil.logMethodEnd(log);
     }
 
