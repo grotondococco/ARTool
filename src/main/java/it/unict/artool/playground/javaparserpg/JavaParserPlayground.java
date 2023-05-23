@@ -6,6 +6,7 @@ import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import it.unict.artool.util.CodeGenerationUtil;
 import it.unict.artool.util.JPUtil;
 import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,7 @@ public class JavaParserPlayground {
         ModifierVisitor<?> numericLiteralVisitor = new IntegerLiteralModifier();
         Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
         cu.ifPresent(compilationUnit -> numericLiteralVisitor.visit(cu.get(), null));
+        CodeGenerationUtil.generateVariant(cu.get(), JPPMain.OUT_PATH);
         LoggerUtil.logMethodEnd(log);
     }
 
@@ -82,6 +84,7 @@ public class JavaParserPlayground {
         ConditionalModifier.initMap();
         Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
         cu.ifPresent(compilationUnit -> conditionalModifier.visit(cu.get(), blockStmtListMap));
+        conditionalModifier.generateSwitchVariant(cu.get(), blockStmtListMap);
         LoggerUtil.logMethodEnd(log);
         return blockStmtListMap;
     }

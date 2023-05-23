@@ -18,6 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class JPUtil {
 
+
     public static Optional<CompilationUnit> getCompilationUnitFromFile(String filePath) {
         try {
             return Optional.of(StaticJavaParser.parse(new File(filePath)));
@@ -27,6 +28,11 @@ public class JPUtil {
         return Optional.empty();
     }
 
+    /**
+     * Extracts from a directory a list of CompilationUnit representing parsed java files
+     *
+     * @param inputFolder the given path of directory containing java files
+     */
     public static List<CompilationUnit> getCompilationUnitList(String inputFolder) {
         List<CompilationUnit> compilationUnitList = new ArrayList<>();
         Path inputPath = Path.of(inputFolder);
