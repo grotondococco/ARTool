@@ -1,35 +1,24 @@
 package it.unict.artool.playground.javaparserpg;
 
-import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import it.unict.artool.enums.Errors;
+import it.unict.artool.util.JPUtil;
 import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class JavaParserPlayground {
 
     public void printMethods(String filePath) {
         LoggerUtil.logMethodStart(log);
-        try {
-            CompilationUnit cu = StaticJavaParser.parse(new File(filePath));
-            MethodNamePrinter methodNamePrinter = new MethodNamePrinter();
-            printMethodList(methodNamePrinter.getMethodList(cu));
-        } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
-        }
+        Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
+        cu.ifPresent(compilationUnit -> printMethodList((MethodNamePrinter.getMethodList(compilationUnit))));
         LoggerUtil.logMethodEnd(log);
     }
 
@@ -47,13 +36,8 @@ public class JavaParserPlayground {
         LoggerUtil.logMethodStart(log);
         List<String> methodNames = new ArrayList<>();
         VoidVisitor<List<String>> methodNameCollector = new MethodNameCollector();
-        CompilationUnit cu = null;
-        try {
-            cu = StaticJavaParser.parse(new File(filePath));
-        } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
-        }
-        methodNameCollector.visit(cu, methodNames);
+        Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
+        cu.ifPresent(compilationUnit -> methodNameCollector.visit(cu.get(), methodNames));
         LoggerUtil.logMethodEnd(log);
         return methodNames;
     }
@@ -68,26 +52,16 @@ public class JavaParserPlayground {
     public void printIntegerLiteralWithModifier(String filePath) {
         LoggerUtil.logMethodStart(log);
         ModifierVisitor<?> numericLiteralVisitor = new IntegerLiteralModifier();
-        CompilationUnit cu = null;
-        try {
-            cu = StaticJavaParser.parse(new File(filePath));
-        } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
-        }
-        numericLiteralVisitor.visit(cu, null);
+        Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
+        cu.ifPresent(compilationUnit -> numericLiteralVisitor.visit(cu.get(), null));
         LoggerUtil.logMethodEnd(log);
     }
 
     public void locateLoops(String filePath) {
         LoggerUtil.logMethodStart(log);
         VoidVisitorAdapter<Void> loopLocator = new LoopLocator();
-        CompilationUnit cu = null;
-        try {
-            cu = StaticJavaParser.parse(new File(filePath));
-        } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
-        }
-        loopLocator.visit(cu, null);
+        Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
+        cu.ifPresent(compilationUnit -> loopLocator.visit(cu.get(), null));
         LoggerUtil.logMethodEnd(log);
     }
 
@@ -105,14 +79,9 @@ public class JavaParserPlayground {
         LoggerUtil.logMethodStart(log);
         Map<BlockStmt, List<IfStmt>> blockStmtListMap = new HashMap<>();
         ConditionalModifier conditionalModifier = new ConditionalModifier();
-        conditionalModifier.initMap();
-        CompilationUnit cu = null;
-        try {
-            cu = StaticJavaParser.parse(new File(filePath));
-        } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
-        }
-        conditionalModifier.visit(cu, blockStmtListMap);
+        ConditionalModifier.initMap();
+        Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
+        cu.ifPresent(compilationUnit -> conditionalModifier.visit(cu.get(), blockStmtListMap));
         LoggerUtil.logMethodEnd(log);
         return blockStmtListMap;
     }

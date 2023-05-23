@@ -6,13 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JPPMain {
 
-    private static final String CYCLE_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CycleSample.java";
+    public static final String CYCLE_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CycleSample.java";
 
-    private static final String INTEGER_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/IntegerModifySample.java";
+    public static final String INTEGER_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/IntegerModifySample.java";
 
-    private static final String COMMENT_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CommentSample.java";
+    public static final String COMMENT_SAMPLE_PATH = "src/main/java/it/unict/artool/playground/codesamples/CommentSample.java";
 
-    private static final String MULTIPLE_IF_PATH = "src/main/java/it/unict/artool/playground/codesamples/MultipleIfSample.java";
+    public static final String MULTIPLE_IF_PATH = "src/main/java/it/unict/artool/playground/codesamples/MultipleIfSample.java";
 
     public static void main(String[] args) {
         LoggerUtil.logMethodStart(log);

@@ -51,8 +51,8 @@ public class ConditionalModifier extends ModifierVisitor<Map<BlockStmt, List<IfS
         }
     }
 
-    public static List<BlockStmt> getSwitchSuggestion (Map<BlockStmt, List<IfStmt>> blockStmtListMap){
-        //TODO 
+    public static List<BlockStmt> getSwitchSuggestion(Map<BlockStmt, List<IfStmt>> blockStmtListMap) {
+        //TODO
         return null;
     }
 
