@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +30,14 @@ public class CodeGenerationUtil {
             String fileName = primaryTypeName.map((name) -> name + ".java").orElse("test.java");
             newFile = new File(Constants.SAVE_DIR + fileName);
             if (newFile.createNewFile()) {
-                log.info("Variant file {} created: @ {}", newFile.getName(), Constants.SAVE_DIR);
+                log.info("Variant file {} created.", Path.of(newFile.getAbsolutePath()).normalize());
             }
         } catch (IOException e) {
             log.error("Cannot create file.");
         }
         try (FileWriter fileWriter = new FileWriter(newFile)) {
             fileWriter.write(cu.toString());
-            log.info("Variant file generated @ {}{}", Constants.SAVE_DIR, newFile.getName());
+            log.info("Variant file generated {}.", Path.of(newFile.getAbsolutePath()).normalize());
         } catch (IOException e) {
             log.error(Errors.GENERIC.getDescrption());
         }
