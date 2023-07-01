@@ -32,11 +32,10 @@ public class JPUtil {
     /**
      * Extracts from a directory a list of CompilationUnit representing parsed java files
      *
-     * @param inputFolder the given path of directory containing java files
+     * @param inputPath the given path of directory containing java files
      */
-    public static List<CompilationUnit> getCompilationUnitList(String inputFolder) {
+    public static List<CompilationUnit> getCompilationUnitList(Path inputPath) {
         List<CompilationUnit> compilationUnitList = new ArrayList<>();
-        Path inputPath = Path.of(inputFolder);
         if (Files.isDirectory(inputPath)) {
             try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(inputPath)) {
                 for (Path path : directoryStream) {

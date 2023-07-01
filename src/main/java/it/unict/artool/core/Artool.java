@@ -14,7 +14,7 @@ public class Artool {
     public static void generateVariant(){
         Path inputPath = Path.of(Constants.INPUT_DIR);
         log.info("Reading standard input directory: {}",inputPath.normalize().toAbsolutePath());
-        List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(Constants.INPUT_DIR);
+        List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(inputPath);
         log.info("Found: {} Java files.",compilationUnitList.size());
         for (CompilationUnit compilationUnit : compilationUnitList) {
             // n test n generation of variants

@@ -70,7 +70,8 @@ public class CodeGenerationUtil {
     }
 
     public static void generateAllVariant() {
-        List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(Constants.INPUT_DIR);
+        Path inputPath = Path.of(Constants.INPUT_DIR);
+        List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(inputPath);
         for (CompilationUnit compilationUnit : compilationUnitList) {
             CodeGenerationUtil.generateVariant(compilationUnit);
         }
