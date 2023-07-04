@@ -2,16 +2,16 @@ package it.unict.artool.enums;
 
 public enum Errors {
 
-    GENERIC("An error occurred"), FILE_NOT_FOUND("Input file not found."), FILE_ALREADY_EXISTS("Output file already exists");
+    GENERIC("An error occurred"), FILE_NOT_FOUND("Input file not found."), ALGORITHM_NOT_SUPPORTED("Selected algorithm recognition not supported");
 
-    private Errors(final String description) {
-        this.descrption = description;
+    Errors(final String description) {
+        this.description = description;
     }
 
-    private final String descrption;
+    private final String description;
 
-    public String getDescrption() {
-        return descrption;
+    public String getDescription() {
+        return description;
     }
 
 }

@@ -20,7 +20,7 @@ public class CommentReporter {
         try {
             cu = StaticJavaParser.parse(new File(filePath));
         } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
+            log.error(Errors.FILE_NOT_FOUND.getDescription());
         }
         List<Comment> allContainedComments = cu != null ? cu.getAllContainedComments() : null;
         if (Objects.isNull(allContainedComments)) {

@@ -55,7 +55,7 @@ public class JavaParserPlayground {
         ModifierVisitor<?> numericLiteralVisitor = new IntegerLiteralModifier();
         Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
         cu.ifPresent(compilationUnit -> numericLiteralVisitor.visit(cu.get(), null));
-        CodeGenerationUtil.generateVariant(cu.get(), JPPMain.OUT_PATH);
+        CodeGenerationUtil.outputVariant(cu.get(), JPPMain.OUT_PATH);
         LoggerUtil.logMethodEnd(log);
     }
 

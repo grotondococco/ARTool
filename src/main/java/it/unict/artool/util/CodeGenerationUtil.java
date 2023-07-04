@@ -23,7 +23,7 @@ public class CodeGenerationUtil {
      *
      * @param cu the given Compilatioun unit representing the parsed java file
      */
-    public static void generateVariant(CompilationUnit cu) {
+    public static void outputVariant(CompilationUnit cu) {
         File newFile = null;
         try {
             Optional<String> primaryTypeName = cu.getPrimaryTypeName();
@@ -39,7 +39,7 @@ public class CodeGenerationUtil {
             fileWriter.write(cu.toString());
             log.info("Variant file generated {}.", Path.of(newFile.getAbsolutePath()).normalize());
         } catch (IOException e) {
-            log.error(Errors.GENERIC.getDescrption());
+            log.error(Errors.GENERIC.getDescription());
         }
     }
 
@@ -49,7 +49,7 @@ public class CodeGenerationUtil {
      * @param cu       the given CompilationUnit representing the parsed java file
      * @param filePath the given String as relative path to the variant
      */
-    public static void generateVariant(CompilationUnit cu, String filePath) {
+    public static void outputVariant(CompilationUnit cu, String filePath) {
         File newFile = null;
         try {
             Optional<String> primaryTypeName = cu.getPrimaryTypeName();
@@ -65,7 +65,7 @@ public class CodeGenerationUtil {
             fileWriter.write(cu.toString());
             log.info("Variant file generated @ {}{}", filePath, newFile.getName());
         } catch (IOException e) {
-            log.error(Errors.GENERIC.getDescrption());
+            log.error(Errors.GENERIC.getDescription());
         }
     }
 
@@ -73,7 +73,7 @@ public class CodeGenerationUtil {
         Path inputPath = Path.of(Constants.INPUT_DIR);
         List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(inputPath);
         for (CompilationUnit compilationUnit : compilationUnitList) {
-            CodeGenerationUtil.generateVariant(compilationUnit);
+            CodeGenerationUtil.outputVariant(compilationUnit);
         }
     }
 

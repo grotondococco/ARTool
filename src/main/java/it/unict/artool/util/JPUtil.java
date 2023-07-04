@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -24,7 +23,7 @@ public class JPUtil {
         try {
             return Optional.of(StaticJavaParser.parse(new File(filePath)));
         } catch (FileNotFoundException e) {
-            log.error(Errors.FILE_NOT_FOUND.getDescrption());
+            log.error(Errors.FILE_NOT_FOUND.getDescription());
         }
         return Optional.empty();
     }
@@ -46,7 +45,7 @@ public class JPUtil {
                     }
                 }
             } catch (IOException e) {
-                log.error(Errors.FILE_NOT_FOUND.getDescrption());
+                log.error(Errors.FILE_NOT_FOUND.getDescription());
             }
         }
         return compilationUnitList;

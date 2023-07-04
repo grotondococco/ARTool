@@ -2,10 +2,12 @@ package it.unict.artool.playground.javaparserpg;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.comments.LineComment;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.Visitable;
+import it.unict.artool.util.CodeGenerationUtil;
 
 import java.util.*;
 
@@ -53,12 +55,16 @@ public class ConditionalModifier extends ModifierVisitor<Map<BlockStmt, List<IfS
     }
 
     public List<BlockStmt> generateSwitchVariant(CompilationUnit cu, Map<BlockStmt, List<IfStmt>> blockStmtListMap) {
+        Node testNode = new LineComment("test");
         for (BlockStmt b : blockStmtListMap.keySet()) {
+            for (IfStmt is : blockStmtListMap.get(b)) {
+                cu.getLocalDeclarationFromClassname(cu.getPrimaryTypeName().get()).get(0).getMethods().get(0).getBody().get().getStatements().remove(is);
+//                cu.getLocalDeclarationFromClassname(cu.getPrimaryTypeName().get()).get(0).getMethods().get(0).getBody().get().getStatements().remove(is);
+            }
             //TODO: localizzare i blocchi contenenti gli ifsmt ripetuti su stessa variabile e commutarli in switch
             //TODO: eliminare gli ifstms e inserire uno switchstmt unico
 //            SwitchStmt switchStmt=new SwitchStmt();
 //            SwitchEntry switchEntry=new SwitchEntry();
-            System.out.println("TEST");
 //            fd.getVariables().forEach(v ->
 //                    v.getInitializer().ifPresent(i ->
 //                            i.ifIntegerLiteralExpr(il ->
@@ -68,6 +74,7 @@ public class ConditionalModifier extends ModifierVisitor<Map<BlockStmt, List<IfS
 //            );
 //            return fd;
         }
+        CodeGenerationUtil.outputVariant(cu);
         return null;
     }
 
