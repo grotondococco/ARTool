@@ -2,6 +2,7 @@ package it.unict.artool.core;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.comments.LineComment;
+import com.github.javaparser.ast.stmt.IfStmt;
 import it.unict.artool.enums.AlgorithmRecognition;
 import it.unict.artool.enums.Errors;
 import it.unict.artool.util.CodeGenerationUtil;
@@ -11,6 +12,7 @@ import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +69,8 @@ public class Artool {
     private static void generateAlgorithmVariantLookingForMultipleIf(CompilationUnit compilationUnit) {
         LoggerUtil.logMethodStart(log);
         compilationUnit.addOrphanComment(new LineComment("Artool.generateAlgorithmVariantLookingForMultipleIf Usage"));
+        ConditionalModifier conditionalModifier = new ConditionalModifier();
+        conditionalModifier.visit(compilationUnit,null);
     }
 
     private static void generateAlgorithmVariantLookingForArray(CompilationUnit compilationUnit) {
