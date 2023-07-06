@@ -12,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
 @Slf4j
 public class Artool {
 
-    public static void generateVariant(Set<AlgorithmRecognition> algorithmRecognitionSet) {
+    public static void generateVariant(TreeSet<AlgorithmRecognition> algorithmRecognitionSet) {
         Path inputPath = Path.of(Constants.INPUT_DIR);
         log.info("Reading standard input directory: {}", inputPath.normalize().toAbsolutePath());
         List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(inputPath);
