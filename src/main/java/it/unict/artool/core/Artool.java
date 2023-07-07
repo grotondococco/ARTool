@@ -4,21 +4,19 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.comments.LineComment;
 import it.unict.artool.enums.AlgorithmRecognition;
 import it.unict.artool.enums.Errors;
-import it.unict.artool.util.CodeGenerationUtil;
-import it.unict.artool.util.Constants;
 import it.unict.artool.util.JPUtil;
 import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.Set;
 
 @Slf4j
 public class Artool {
 
-    public static void generateVariant(TreeSet<AlgorithmRecognition> algorithmRecognitionSet) {
-        Path inputPath = Path.of(Constants.INPUT_DIR);
+    public static void generateVariant(Set<AlgorithmRecognition> algorithmRecognitionSet, String INPUT_DIR, String OUTPUT_DIR) {
+        Path inputPath = Path.of(INPUT_DIR);
         log.info("Reading standard input directory: {}", inputPath.normalize().toAbsolutePath());
         List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(inputPath);
         log.info("Found: {} Java files.", compilationUnitList.size());
@@ -27,7 +25,7 @@ public class Artool {
             for (AlgorithmRecognition algorithmRecognition : algorithmRecognitionSet) {
                 generateAlgorithmVariant(compilationUnit, algorithmRecognition);
             }
-            CodeGenerationUtil.outputVariant(compilationUnit);
+            JPUtil.outputVariant(compilationUnit,OUTPUT_DIR);
         }
     }
 

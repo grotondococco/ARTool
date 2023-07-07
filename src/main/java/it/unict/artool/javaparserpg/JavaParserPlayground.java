@@ -1,10 +1,9 @@
-package it.unict.artool.playground.javaparserpg;
+package it.unict.artool.javaparserpg;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import it.unict.artool.util.CodeGenerationUtil;
 import it.unict.artool.util.JPUtil;
 import it.unict.artool.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +52,7 @@ public class JavaParserPlayground {
         ModifierVisitor<?> numericLiteralVisitor = new IntegerLiteralModifier();
         Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
         cu.ifPresent(compilationUnit -> numericLiteralVisitor.visit(cu.get(), null));
-        CodeGenerationUtil.outputVariant(cu.get(), JPPMain.OUT_PATH);
+        JPUtil.outputVariant(cu.get(), JPPMain.SAMPLES_OUT_PATH);
         LoggerUtil.logMethodEnd(log);
     }
 

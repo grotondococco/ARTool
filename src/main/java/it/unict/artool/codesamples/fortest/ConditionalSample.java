@@ -1,8 +1,8 @@
-package it.unict.artool.playground.codesamples;
+package it.unict.artool.codesamples.fortest;
 
 public class ConditionalSample {
 
-    private static int method1(int n) {
+    public static int method1(int n) {
         if (n == 0) {
             n = n + 1;
         }
@@ -3015,7 +3015,7 @@ public class ConditionalSample {
         return n;
     }
 
-    private static int method2(int n) {
+    public static int method2(int n) {
         int result = 0;
         if (n == 0) {
             result = result + 1;
@@ -3032,7 +3032,7 @@ public class ConditionalSample {
         return result;
     }
 
-    private static int method3(int k) {
+    public static int method3(int k) {
         int result = 0;
         if (k == 0) {
             result = result + 1;

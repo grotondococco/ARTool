@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -49,6 +50,31 @@ public class JPUtil {
             }
         }
         return compilationUnitList;
+    }
+
+    /**
+     * Streams out the CompilationUnit into a java file and saves it in the standard SAVE_DIR defined in Constants Interface.
+     *
+     * @param cu the given Compilatioun unit representing the parsed java file
+     */
+    public static void outputVariant(CompilationUnit cu,String OUTPUT_DIR) {
+        File newFile = null;
+        try {
+            Optional<String> primaryTypeName = cu.getPrimaryTypeName();
+            String fileName = primaryTypeName.map((name) -> name + ".java").orElse("test.java");
+            newFile = new File(OUTPUT_DIR + fileName);
+            if (newFile.createNewFile()) {
+                log.info("Variant file {} created.", Path.of(newFile.getAbsolutePath()).normalize());
+            }
+        } catch (IOException e) {
+            log.error("Cannot create file.");
+        }
+        try (FileWriter fileWriter = new FileWriter(newFile)) {
+            fileWriter.write(cu.toString());
+            log.info("Variant file generated {}.", Path.of(newFile.getAbsolutePath()).normalize());
+        } catch (IOException e) {
+            log.error(Errors.GENERIC.getDescription());
+        }
     }
 
 }

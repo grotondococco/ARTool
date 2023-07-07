@@ -1,4 +1,4 @@
-package it.unict.artool.playground.codesamples;
+package it.unict.artool.codesamples;
 
 import lombok.extern.slf4j.Slf4j;
 

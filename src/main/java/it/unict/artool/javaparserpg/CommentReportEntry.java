@@ -1,4 +1,4 @@
-package it.unict.artool.playground.javaparserpg;
+package it.unict.artool.javaparserpg;
 
 import lombok.Data;
 

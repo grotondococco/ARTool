@@ -1,4 +1,4 @@
-package it.unict.artool.playground.javaparserpg;
+package it.unict.artool.javaparserpg;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
