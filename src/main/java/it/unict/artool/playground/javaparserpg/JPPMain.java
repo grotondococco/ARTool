@@ -39,8 +39,6 @@ public class JPPMain {
         // printIfStatementsinSameBlock(String filePath) call
 //        javaParserPlayground.printIfStatementsinSameBlock(MULTIPLE_IF_PATH);
 
-//        // printIfStatementsinSameBlock(String filePath) call
-        javaParserPlayground.printMultipleIfStatements(MULTIPLE_IF_PATH);
 
         LoggerUtil.logMethodEnd(log);
     }

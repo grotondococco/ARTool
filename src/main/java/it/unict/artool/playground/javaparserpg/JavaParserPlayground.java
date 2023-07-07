@@ -1,8 +1,6 @@
 package it.unict.artool.playground.javaparserpg;
 
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -75,51 +73,6 @@ public class JavaParserPlayground {
         } else {
             log.info("No comments found");
         }
-    }
-
-    private Map<BlockStmt, List<IfStmt>> getIfStatementMap(String filePath) {
-        LoggerUtil.logMethodStart(log);
-        Map<BlockStmt, List<IfStmt>> blockStmtListMap = new HashMap<>();
-        ConditionalModifier conditionalModifier = new ConditionalModifier();
-        ConditionalModifier.initMap();
-        Optional<CompilationUnit> cu = JPUtil.getCompilationUnitFromFile(filePath);
-        cu.ifPresent(compilationUnit -> conditionalModifier.visit(cu.get(), blockStmtListMap));
-        conditionalModifier.generateSwitchVariant(cu.get(), blockStmtListMap);
-        LoggerUtil.logMethodEnd(log);
-        return blockStmtListMap;
-    }
-
-    public void printIfStatementsinSameBlock(String filePath) {
-        LoggerUtil.logMethodStart(log);
-        Map<BlockStmt, List<IfStmt>> blockStmtListMap = getIfStatementMap(filePath);
-        for (BlockStmt b : blockStmtListMap.keySet()) {
-            log.info("Found Block Statement containing \"if conditions\" @ Line[{}]:\n {}", b.getRange().get().begin.line, blockStmtListMap.get(b));
-        }
-        LoggerUtil.logMethodEnd(log);
-    }
-
-    public void printMultipleIfStatements(String filePath) {
-        LoggerUtil.logMethodStart(log);
-        Map<BlockStmt, List<IfStmt>> blockStmtListMap = getIfStatementMap(filePath);
-        Map<String, List<String>> multipleIfMap = new HashMap<>();
-        for (BlockStmt b : blockStmtListMap.keySet()) {
-            List<IfStmt> ifStmtList = blockStmtListMap.get(b);
-            for (IfStmt ifStmt : ifStmtList) {
-                String conditionLeft = ifStmt.getCondition().asBinaryExpr().getLeft().toString();
-                if (!multipleIfMap.containsKey(conditionLeft)) {
-                    multipleIfMap.put(conditionLeft, new ArrayList<>());
-                }
-                multipleIfMap.get(conditionLeft).add(String.valueOf(ifStmt.getRange().get().begin.line));
-            }
-        }
-        for (String b : multipleIfMap.keySet()) {
-            if (multipleIfMap.get(b).size() > 1) {
-                log.info("For the variable \"{}\" - found usage in multiple if statement @ lines: {}", b, multipleIfMap.get(b));
-            }
-        }
-        //TODO propose switch
-//        for (BlockStmt blockStmt : )
-        LoggerUtil.logMethodEnd(log);
     }
 
 }
