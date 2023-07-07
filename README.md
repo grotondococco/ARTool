@@ -4,11 +4,14 @@
 
 Sviluppo di un tool di riconoscimento di algoritmi e generazioni di varianti su classi .java.
 
-Le varianti in output su file .java vengono prese in analisi da PowerApi, la quale identifica la versione energicamente
+Le varianti in output su file .java vengono prese in analisi da JoularJX, la quale identifica la versione energicamente
 più performante.
 
-## Technology Stack - Stack Tecnologico
+## Tecnologie
 
     Java 17
+    Lombok
+    SLF4J
+    JUNIT
     JavaParser
-    PowerApi
+    JoularJX
