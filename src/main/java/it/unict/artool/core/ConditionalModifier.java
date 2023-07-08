@@ -76,7 +76,7 @@ public class ConditionalModifier extends ModifierVisitor<Void> {
     private SwitchStmt generateSwitchVariantFromIfstmtList(List<IfStmt> ifStmtList) {
         IfStmt sampleIfStmt = ifStmtList.stream().findAny().orElseThrow(() -> new RuntimeException(Errors.GENERIC.getDescription()));
         SwitchStmt switchStmt = new SwitchStmt();
-        switchStmt.setComment(new LineComment("Multiple If statements on same Left Expression converted into Switch Statement."));
+        switchStmt.setComment(new LineComment("ARTool: Multiple If statements on same Left Expression converted into Switch Statement."));
         switchStmt.setSelector(getLeftExpressionFromIfStmtAsBinaryExpr(sampleIfStmt));
         NodeList<SwitchEntry> switchEntryNodeList = new NodeList<>();
         for (IfStmt ifStmt : ifStmtList) {

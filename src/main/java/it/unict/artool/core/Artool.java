@@ -21,7 +21,7 @@ public class Artool {
         List<CompilationUnit> compilationUnitList = JPUtil.getCompilationUnitList(inputPath);
         log.info("Found: {} Java files.", compilationUnitList.size());
         for (CompilationUnit compilationUnit : compilationUnitList) {
-            compilationUnit.addOrphanComment(new LineComment("Variant file generated using the following list of Algorithm Recognition:"));
+            compilationUnit.addOrphanComment(new LineComment("ARTool: Variant file generated using the following list of Algorithm Recognition:"));
             for (AlgorithmRecognition algorithmRecognition : algorithmRecognitionSet) {
                 generateAlgorithmVariant(compilationUnit, algorithmRecognition);
             }
@@ -77,6 +77,7 @@ public class Artool {
 
     private static void generateAlgorithmVariantLookingForSigleMethodCall(CompilationUnit compilationUnit) {
         LoggerUtil.logMethodStart(log);
+        new SingleMethodModifier().visit(compilationUnit,null);
     }
 
 

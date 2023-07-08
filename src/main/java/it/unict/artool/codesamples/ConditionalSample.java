@@ -3051,6 +3051,7 @@ public class ConditionalSample {
 
     public static void main(String[] args) {
         int n = method1(1000);
+        int n2 = method1(1000);
         System.out.println(n);
     }
 }
