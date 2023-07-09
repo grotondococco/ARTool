@@ -35,10 +35,6 @@ public class Artool {
                 compilationUnit.addOrphanComment(new LineComment(AlgorithmRecognition.CONDITIONAL.getDescription()));
                 generateAlgorithmVariantLookingForMultipleIf(compilationUnit);
             }
-            case ARRAY -> {
-                compilationUnit.addOrphanComment(new LineComment(AlgorithmRecognition.ARRAY.getDescription()));
-                generateAlgorithmVariantLookingForArray(compilationUnit);
-            }
             case LIST -> {
                 compilationUnit.addOrphanComment(new LineComment(AlgorithmRecognition.LIST.getDescription()));
                 generateAlgorithmVariantLookingForList(compilationUnit);
@@ -73,6 +69,9 @@ public class Artool {
 
     private static void generateAlgorithmVariantLookingForSet(CompilationUnit compilationUnit) {
         LoggerUtil.logMethodStart(log);
+        SetModifier setModifier = new SetModifier();
+        setModifier.visit(compilationUnit,null);
+        setModifier.logEnd();
     }
 
     private static void generateAlgorithmVariantLookingForSigleMethodCall(CompilationUnit compilationUnit) {
