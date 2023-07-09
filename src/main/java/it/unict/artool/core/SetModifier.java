@@ -21,7 +21,7 @@ public class SetModifier extends ModifierVisitor<Void> {
 
     private int convertCount;
 
-    public SetModifier(){
+    public SetModifier() {
         super();
         convertCount = 0;
     }
@@ -39,15 +39,15 @@ public class SetModifier extends ModifierVisitor<Void> {
 
     private void findAndConvertTreeSet(VariableDeclarationExpr n) {
         NodeList<VariableDeclarator> variableDeclaratorNodeList = n.getVariables();
-        for (VariableDeclarator variableDeclarator : variableDeclaratorNodeList){
+        for (VariableDeclarator variableDeclarator : variableDeclaratorNodeList) {
             Type type = variableDeclarator.getType();
-            if (type.isClassOrInterfaceType()){
+            if (type.isClassOrInterfaceType()) {
                 SimpleName simpleName = ((ClassOrInterfaceType) type).getName();
-                if (simpleName.asString().equals("TreeSet")){
+                if (simpleName.asString().equals("TreeSet")) {
                     insertComment(n);
                     ((ClassOrInterfaceType) type).setName("HashSet");
-                    Optional<Expression>  variableInitializer = variableDeclarator.getInitializer();
-                    Optional<ObjectCreationExpr> objectCreationExpr =  variableInitializer.map(Expression::asObjectCreationExpr);
+                    Optional<Expression> variableInitializer = variableDeclarator.getInitializer();
+                    Optional<ObjectCreationExpr> objectCreationExpr = variableInitializer.map(Expression::asObjectCreationExpr);
                     objectCreationExpr.ifPresent(creationExpr -> creationExpr.getType().setName("HashSet"));
                     convertCount++;
                 }
@@ -59,8 +59,8 @@ public class SetModifier extends ModifierVisitor<Void> {
         n.setComment(new LineComment("ARTool: TreeSet type converted into HashSet type."));
     }
 
-    public void logEnd(){
-        log.info("Found and converted {} TreeSet into HashSet.",this.getConvertCount());
+    public void logEnd() {
+        log.info("Found and converted {} TreeSet into HashSet.", this.getConvertCount());
     }
 
 }
