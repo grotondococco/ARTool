@@ -48,14 +48,14 @@ public class SingleMethodModifier extends ModifierVisitor<Void> {
                 }
             }
         }
-        List<MethodDeclaration> declarationListToDelete=new ArrayList<>();
+        List<MethodDeclaration> declarationListToDelete = new ArrayList<>();
         for (MethodDeclaration methodDeclaration : methodDeclarationMethodCallExprMap.keySet()) {
             List<MethodCallExpr> methodCallExprListInternal = methodDeclarationMethodCallExprMap.get(methodDeclaration);
             if (methodCallExprListInternal.size() != 1) {
                 declarationListToDelete.add(methodDeclaration);
             }
         }
-        for(MethodDeclaration methodDeclaration : declarationListToDelete){
+        for (MethodDeclaration methodDeclaration : declarationListToDelete) {
             methodDeclarationMethodCallExprMap.remove(methodDeclaration);
         }
         log.info("Found {} method called once ", methodDeclarationMethodCallExprMap.size());

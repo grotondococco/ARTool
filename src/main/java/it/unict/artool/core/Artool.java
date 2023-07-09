@@ -25,7 +25,7 @@ public class Artool {
             for (AlgorithmRecognition algorithmRecognition : algorithmRecognitionSet) {
                 generateAlgorithmVariant(compilationUnit, algorithmRecognition);
             }
-            JPUtil.outputVariant(compilationUnit,OUTPUT_DIR);
+            JPUtil.outputVariant(compilationUnit, OUTPUT_DIR);
         }
     }
 
@@ -59,24 +59,23 @@ public class Artool {
         new ConditionalModifier().visit(compilationUnit, null);
     }
 
-    private static void generateAlgorithmVariantLookingForArray(CompilationUnit compilationUnit) {
-        LoggerUtil.logMethodStart(log);
-    }
-
     private static void generateAlgorithmVariantLookingForList(CompilationUnit compilationUnit) {
         LoggerUtil.logMethodStart(log);
+        ListModifier listModifier = new ListModifier();
+        listModifier.visit(compilationUnit, null);
+        listModifier.logEnd();
     }
 
     private static void generateAlgorithmVariantLookingForSet(CompilationUnit compilationUnit) {
         LoggerUtil.logMethodStart(log);
         SetModifier setModifier = new SetModifier();
-        setModifier.visit(compilationUnit,null);
+        setModifier.visit(compilationUnit, null);
         setModifier.logEnd();
     }
 
     private static void generateAlgorithmVariantLookingForSigleMethodCall(CompilationUnit compilationUnit) {
         LoggerUtil.logMethodStart(log);
-        new SingleMethodModifier().visit(compilationUnit,null);
+        new SingleMethodModifier().visit(compilationUnit, null);
     }
 
 

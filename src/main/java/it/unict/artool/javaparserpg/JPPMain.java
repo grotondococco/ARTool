@@ -17,7 +17,7 @@ public class JPPMain {
 
     public static void main(String[] args) {
         LoggerUtil.logMethodStart(log);
-        Artool.generateVariant(new TreeSet<>(List.of(AlgorithmRecognition.CONDITIONAL)),SAMPLES_TEST_PATH,SAMPLES_TEST_PATH);
+        Artool.generateVariant(new TreeSet<>(List.of(AlgorithmRecognition.CONDITIONAL)), SAMPLES_TEST_PATH, SAMPLES_TEST_PATH);
         LoggerUtil.logMethodEnd(log);
     }
 

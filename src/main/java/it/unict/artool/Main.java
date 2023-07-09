@@ -23,7 +23,7 @@ public class Main {
         JavaSymbolSolver symbolSolver = new JavaSymbolSolver(typeSolver);
         StaticJavaParser.getParserConfiguration().setSymbolResolver(symbolSolver);
         TreeSet<AlgorithmRecognition> algorithmRecognitionSet = new TreeSet<>(List.of(AlgorithmRecognition.values()));
-        Artool.generateVariant(algorithmRecognitionSet,IN_PATH,OUT_PATH);
+        Artool.generateVariant(algorithmRecognitionSet, IN_PATH, OUT_PATH);
     }
 
 }

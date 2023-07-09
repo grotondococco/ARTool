@@ -16,7 +16,7 @@ public class SetSampleTest {
     }
 
     @Test
-    void mainTest(){
+    void mainTest() {
         String[] args = null;
         SetSample.main(args);
         Assertions.assertEquals(

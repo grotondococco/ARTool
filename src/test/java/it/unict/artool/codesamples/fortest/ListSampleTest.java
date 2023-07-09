@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class SingleMethodSampleTest {
+public class ListSampleTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
@@ -18,16 +18,10 @@ public class SingleMethodSampleTest {
     @Test
     void mainTest() {
         String[] args = null;
-        SingleMethodSample.main(args);
+        ListSample.main(args);
         Assertions.assertEquals(
-                "TESTSTRING\r\n" +
-                        "TEST_STRINGTESTSTRING\r\n" +
-                        "teststring\r\n" +
-                        "test_stringteststring",
+                "TEST 4",
                 outputStreamCaptor.toString()
                         .trim());
     }
-
 }
-
-

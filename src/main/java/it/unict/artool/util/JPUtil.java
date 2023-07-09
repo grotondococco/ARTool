@@ -57,7 +57,7 @@ public class JPUtil {
      *
      * @param cu the given Compilatioun unit representing the parsed java file
      */
-    public static void outputVariant(CompilationUnit cu,String OUTPUT_DIR) {
+    public static void outputVariant(CompilationUnit cu, String OUTPUT_DIR) {
         File newFile = null;
         try {
             Optional<String> primaryTypeName = cu.getPrimaryTypeName();
